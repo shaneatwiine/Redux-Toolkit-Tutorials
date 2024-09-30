@@ -7,8 +7,8 @@ function App() {
   return (
     <div className='App'>
       <CakeView />
-      <IcecreamView />
-      <UserView />
+      {/* <IcecreamView /> */}
+      {/* <UserView /> */}
     </div>
   )
 }

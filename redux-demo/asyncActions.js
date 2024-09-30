@@ -33,21 +33,16 @@ const fetchUsersFailure = error => {
     payload: error
   }
 }
-
 const fetchUsers = () => {
-  return function (dispatch) {
+  return async function (dispatch) {
     dispatch(fetchUsersRequest())
-    axios
-      .get('https://jsonplaceholder.typicode.com/users')
-      .then(response => {
-        // response.data is the users
-        const users = response.data.map(user => user.id)
-        dispatch(fetchUsersSuccess(users))
-      })
-      .catch(error => {
-        // error.message is the error message
-        dispatch(fetchUsersFailure(error.message))
-      })
+    try {
+      const response = await axios.get('https://jsonplaceholder.typicode.com/users')
+      const users = response.data.map(user => user.id)
+      dispatch(fetchUsersSuccess(users))
+    } catch (error) {
+      dispatch(fetchUsersFailure(error.message))
+    }
   }
 }
 
